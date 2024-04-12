@@ -5,7 +5,7 @@ const projectSchema = require("../Models/projectSchema");
 const createProject = asyncHandler(async (req, res) => {
     const { projectName, mainHeading, subHeadings, subImg, pointsArr } = req.body;
 
- 
+
     if (!projectName) {
         throw new Error("Please provide all the necessary details");
     }
@@ -41,16 +41,16 @@ const createProject = asyncHandler(async (req, res) => {
 
 const updateProject = asyncHandler(async (req, res) => {
     const projectId = req.params.id;
-    const { projectName, mainHeading, subHeadings, pointsArr } = req.body;
+    const { projectName, mainHeading, subHeadings, pointsArr, subImg } = req.body;
 
-    if (!projectId || !projectName || !mainHeading || !subHeadings || !pointsArr) {
+    if (!projectId || !projectName || !mainHeading || !subHeadings || !pointsArr || !subImg) {
         throw new Error("Please provide all the necessary details");
     }
 
     try {
         const updatedProject = await projectSchema.findByIdAndUpdate(
             projectId,
-            { projectName, mainHeading, subHeadings, pointsArr },
+            { projectName, mainHeading, subHeadings, pointsArr, subImg },
             { new: true }
         );
 
