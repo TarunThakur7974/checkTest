@@ -2,15 +2,15 @@ const express = require('express')
 const app = express();
 const cors = require('cors');
 const multer = require('multer')
+ 
+const path = require('path');
+const fs = require('fs')
 
 require('dotenv').config()
 const ConnectToMongo = require('./Database');
 const { errorHandler } = require('./errorHandler');
 const port = process.env.PORT || 5500
 
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs')
 
 // Define the destination directory
 const uploadDir = path.join(__dirname, 'uploads');
