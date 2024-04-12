@@ -1,7 +1,7 @@
 const multer = require('multer');
-const { storage } = require('../Middleware/uploadImage');
 const { getProject, createProject, updateProject, getAllProjects, deleteProject } = require('../Controlers/projectControl');
 const { createProjectImg, getImage } = require('../Controlers/ImageControl');
+const { storage } = require('../server');
 const router = require('express').Router();
 
 const upload = multer({ storage: storage })

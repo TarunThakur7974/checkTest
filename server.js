@@ -8,17 +8,30 @@ const ConnectToMongo = require('./Database');
 const { errorHandler } = require('./errorHandler');
 const port = process.env.PORT || 5500
 
-const storage = multer.diskStorage({
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs')
+
+// Define the destination directory
+const uploadDir = path.join(__dirname, 'uploads');
+
+// Ensure that the destination directory exists
+const ensureUploadsDirExists = () => {
+    if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir);
+    }
+};
+
+// Middleware for uploading files
+exports.storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './uploads')
+        ensureUploadsDirExists(); 
+        cb(null, uploadDir);
     },
     filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-        cb(null, file.fieldname + '-' + uniqueSuffix)
+        cb(null, Date.now() + '_' + file.originalname);
     }
-})
-
-const upload = multer({ storage: storage })
+});
 
 ConnectToMongo()
 app.use(cors({

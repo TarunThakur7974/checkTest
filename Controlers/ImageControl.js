@@ -5,8 +5,6 @@ const projectImg = require("../Models/imageSchema");
 const imageSchema = require("../Models/imageSchema");
 
 const createProjectImg = asyncHandler(async (req, res) => {
-    console.log("run")
-    // console.log(req.file,"jgjg")
     try {
         const newProjectImg = await projectImg.create({
             image: req.file.path,
@@ -38,8 +36,6 @@ const getImage = asyncHandler(async (req, res) => {
                 success: true,
                 message: "Image retrieved successfully",
                 project: {
-                    idOne: projectImg.idOne,
-                    idTwo: projectImg.idTwo,
                     image: projectImg.image,
                 }
             });

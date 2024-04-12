@@ -1,12 +1,6 @@
 const mongoose = require('mongoose');
 
 const projectIMG = new mongoose.Schema({
-    idOne: {
-        type: Number
-    },
-    idTwo: {
-        type: Number
-    },
     image: {
         type: String,
     }

@@ -3,18 +3,14 @@ const bcrypt = require('bcryptjs');
 const projectSchema = require("../Models/projectSchema");
 
 const createProject = asyncHandler(async (req, res) => {
-    const { projectName, mainHeading, subHeadings, subImg ,pointsArr } = req.body;
+    const { projectName, mainHeading, subHeadings, subImg, pointsArr } = req.body;
 
-    // if (!projectName || !mainHeading || !subHeadings || !subImg || !imageData || !contentType) {
-    //     throw new Error("Please provide all the necessary details");
-    // }
-    // console.log(pointsArr,subImg,mainHeading,projectName,)
-    if (!projectName || !mainHeading || !subHeadings || !pointsArr || subImg) {
+ 
+    if (!projectName) {
         throw new Error("Please provide all the necessary details");
     }
 
     try {
-        // const imageBuffer = Buffer.from(imageData, 'base64');
         const newProject = await projectSchema.create({
             projectName,
             mainHeading,
